@@ -1,5 +1,5 @@
-from conans import ConanFile, CMake
-from shutil import rmtree
+from conans import ConanFile, tools, CMake
+
 
 class Exiv2Conan(ConanFile):
     name = "Exiv2"
@@ -34,14 +34,14 @@ class Exiv2Conan(ConanFile):
                       "CMAKE_INSTALL_PREFIX" : self.package_folder
                      }
 
+        if tools.os_info.is_windows:
+            cmake_args['EXIV2_ENABLE_WIN_UNICODE'] = "ON"
+
         cmake.configure(source_dir="../exiv2", build_dir="build", defs=cmake_args)
         cmake.build(target="install")
 
     def package(self):
         self.copy("FindExiv2.cmake", ".", ".")
-        #if self.settings.os != "Windows":
-        #    rmtree(self.package_folder + '/bin')
-        #rmtree(self.package_folder + '/man')
 
     def package_info(self):
         self.cpp_info.includedirs = ['include']  # Ordered list of include paths
