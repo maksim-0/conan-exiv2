@@ -11,7 +11,7 @@ int main(int argc, char **argv)
     std::cout << "Input file: " << argv[1] << std::endl;
 
     try {
-        Exiv2::Image::AutoPtr image = Exiv2::ImageFactory::open(argv[1]);
+        auto image = Exiv2::ImageFactory::open(argv[1]);
         image->readMetadata();
         auto data = image->exifData();
 
