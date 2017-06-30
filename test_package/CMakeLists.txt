@@ -1,8 +1,5 @@
-cmake_minimum_required(VERSION 3.3)
+cmake_minimum_required(VERSION 3.8)
 project(Exiv2Test CXX)
-
-set(CMAKE_CXX_STANDARD 11)
-set(CXX_STANDARD_REQUIRED ON)
 
 if (UNIX) # Assuming the usage of gcc or clang compilers
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
