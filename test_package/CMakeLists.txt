@@ -1,5 +1,6 @@
-project(Exiv2Test CXX)
 cmake_minimum_required(VERSION 3.3)
+project(Exiv2Test CXX)
+
 set(CMAKE_CXX_STANDARD 11)
 set(CXX_STANDARD_REQUIRED ON)
 
@@ -8,8 +9,7 @@ if (UNIX) # Assuming the usage of gcc or clang compilers
 endif()
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-#conan_basic_setup()
-conan_set_find_paths()
+conan_basic_setup()
 
 find_package(Exiv2 REQUIRED)
 
