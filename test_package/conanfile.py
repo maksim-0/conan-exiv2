@@ -12,6 +12,9 @@ class Exiv2TestConan(ConanFile):
     def build(self):
         cmake = CMake(self)
         # Current dir is "test_package/build/<build_id>" and CMakeLists.txt is in "test_package"
+        cmake.definitions.pop("CONAN_C_FLAGS")
+        cmake.definitions.pop("CONAN_CXX_FLAGS")
+
         cmake.configure(source_dir=self.conanfile_directory, build_dir="./")
         cmake.build()
 
