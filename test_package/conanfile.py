@@ -18,11 +18,8 @@ class Exiv2TestConan(ConanFile):
     def imports(self):
         self.copy("*.dll", dst="bin", src="bin")
         self.copy("*.dylib*", dst="bin", src="lib")
-        #self.copy("*.dll", src="bin", dst=os.sep.join([".", "bin", "%s" % self.settings.build_type]))
 
     def test(self):
-        #os.chdir("bin")
-        #self.run(".%sexample" % os.sep)
         data_file = os.path.join(self.conanfile_directory, "dji_inspire_xmp_fake.jpg")
         if self.settings.os == "Windows":
             self.run("cd bin/%s && .%stestApp %s" % (self.settings.build_type, os.sep, data_file))
