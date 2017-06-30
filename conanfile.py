@@ -8,8 +8,33 @@ class Exiv2Conan(ConanFile):
     license = "GNU GPL2"
     url = "https://github.com/Exiv2/exiv2"
     settings = "os", "compiler", "build_type", "arch"
-    options = {"shared": [True, False]}
-    default_options = "shared=False"
+
+    options = {
+        "shared": [True, False],
+        "commercial": [True, False],
+        "xmp": [True, False],
+        "png": [True, False],
+        "ssh": [True, False],
+        "curl": [True, False],
+        "webready": [True, False],
+        "video": [True, False],
+        "lensdata": [True, False],
+        "nls": [True, False],
+        "unicode": [True, False]
+    }
+
+    default_options = "shared=True", \
+        "commercial=False", \
+        "xmp=True", \
+        "png=True", \
+        "ssh=False", \
+        "curl=False", \
+        "webready=False", \
+        "video=False", \
+        "lensdata=False", \
+        "unicode=True", \
+        "nls=False"
+
     generators = "cmake"
     exports = ["FindExiv2.cmake"]
 
@@ -19,23 +44,23 @@ class Exiv2Conan(ConanFile):
     def build(self):
         cmake = CMake(self, parallel=True)
 
-        cmake_args = {"EXIV2_ENABLE_NLS" : "OFF",
-                      "EXIV2_ENABLE_LENSDATA" : "OFF",
-                      "EXIV2_ENABLE_COMMERCIAL" : "OFF",
-                      "EXIV2_ENABLE_VIDEO" : "OFF",
-                      "EXIV2_ENABLE_WEBREADY" : "OFF",
-                      "EXIV2_ENABLE_CURL" : "OFF",
-                      "EXIV2_ENABLE_SSH" : "OFF",
+        cmake_args = {"EXIV2_ENABLE_NLS" : self.options.nls,
+                      "EXIV2_ENABLE_LENSDATA" : self.options.lensdata,
+                      "EXIV2_ENABLE_COMMERCIAL" : self.options.commercial,
+                      "EXIV2_ENABLE_VIDEO" : self.options.video,
+                      "EXIV2_ENABLE_WEBREADY" : self.options.webready,
+                      "EXIV2_ENABLE_CURL" : self.options.curl,
+                      "EXIV2_ENABLE_SSH" : self.options.ssh,
                       "EXIV2_ENABLE_BUILD_SAMPLES" : "OFF",
                       "EXIV2_ENABLE_BUILD_PO" : "OFF",
-                      "EXIV2_ENABLE_SHARED" : "ON",
-                      "EXIV2_ENABLE_XMP" : "ON",
-                      "EXIV2_ENABLE_PNG" : "ON",
+                      "EXIV2_ENABLE_SHARED" : self.options.shared,
+                      "EXIV2_ENABLE_XMP" : self.options.xmp,
+                      "EXIV2_ENABLE_PNG" : self.options.png,
                       "CMAKE_INSTALL_PREFIX" : self.package_folder
                      }
 
         if tools.os_info.is_windows:
-            cmake_args['EXIV2_ENABLE_WIN_UNICODE'] = "ON"
+            cmake_args['EXIV2_ENABLE_WIN_UNICODE'] = self.options.unicode
 
         cmake.configure(source_dir="../exiv2", build_dir="build", defs=cmake_args)
         cmake.build(target="install")
