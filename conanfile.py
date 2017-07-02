@@ -8,6 +8,8 @@ class Exiv2Conan(ConanFile):
     license = "GNU GPL2"
     url = "https://github.com/Exiv2/exiv2"
     settings = "os", "compiler", "build_type", "arch"
+    requires = (("zlib/1.2.8@pix4d/stable", "private"),
+                ("Expat/2.2.1@piponazo/testing", "private"))
 
     options = {
         #"shared": [True, False],
@@ -37,6 +39,7 @@ class Exiv2Conan(ConanFile):
 
     generators = "cmake"
     exports = ["FindExiv2.cmake"]
+
 
     def source(self):
         self.run("git clone --depth 1 --branch v%s https://github.com/Exiv2/exiv2.git" % self.version)
