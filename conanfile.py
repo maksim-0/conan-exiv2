@@ -40,7 +40,7 @@ class Exiv2Conan(ConanFile):
 
     def requirements(self):
         self.requires("zlib/1.2.11@conan/stable")
-        self.requires("Expat/2.2.1@piponazo/testing")
+        self.requires("Expat/2.2.1@piponazo/stable")
 
     def configure(self):
         self.options["zlib"].shared = self.options.shared
