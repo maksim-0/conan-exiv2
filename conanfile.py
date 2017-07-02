@@ -71,5 +71,6 @@ class Exiv2Conan(ConanFile):
 
     def package_info(self):
         self.cpp_info.includedirs = ['include']  # Ordered list of include paths
-        self.cpp_info.libs = ['exiv2']  # The libs to link against
+        self.cpp_info.debug.libs = ["exiv2d"]
+        self.cpp_info.release.libs = ["exiv2"]
         self.cpp_info.libdirs = ['lib']  # Directories where libraries can be found
