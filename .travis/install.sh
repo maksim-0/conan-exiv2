@@ -29,3 +29,4 @@ pip install conan --upgrade
 pip install conan_package_tools
 
 conan user
+conan remote add conan-piponazo https://api.bintray.com/conan/piponazo/piponazo
