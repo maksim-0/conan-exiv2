@@ -40,6 +40,9 @@ class Exiv2Conan(ConanFile):
 
     def source(self):
         self.run("git clone --depth 1 --branch v%s https://github.com/Exiv2/exiv2.git" % self.version)
+        tools.replace_in_file("exiv2/CMakeLists.txt", "PROJECT( exiv2 )", '''PROJECT( exiv2 )
+            include(${CMAKE_BINARY_DIR}/../conanbuildinfo.cmake)
+            conan_basic_setup()''')
 
     def build(self):
         cmake = CMake(self, parallel=True)
