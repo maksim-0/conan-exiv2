@@ -8,8 +8,6 @@ class Exiv2Conan(ConanFile):
     license = "GNU GPL2"
     url = "https://github.com/Exiv2/exiv2"
     settings = "os", "compiler", "build_type", "arch"
-    requires = (("zlib/1.2.11@conan/stable", "private"),
-                ("Expat/2.2.1@piponazo/testing", "private"))
 
     options = {
         #"shared": [True, False],
@@ -34,12 +32,19 @@ class Exiv2Conan(ConanFile):
         "video=False", \
         "lensdata=False", \
         "unicode=True", \
+        "shared=True", \
         "nls=False"
-        #"shared=True", \
 
     generators = "cmake"
     exports = ["FindExiv2.cmake"]
 
+    def requirements(self):
+        self.requires("zlib/1.2.11@conan/stable")
+        self.requires("Expat/2.2.1@piponazo/testing")
+
+    def configure(self):
+        self.options["zlib"].shared = self.options.shared
+        self.options["Expat"].shared = self.options.shared
 
     def source(self):
         self.run("git clone --depth 1 --branch v%s https://github.com/Exiv2/exiv2.git" % self.version)
