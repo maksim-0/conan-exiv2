@@ -10,7 +10,7 @@ class Exiv2Conan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
 
     options = {
-        #"shared": [True, False],
+        "shared": [True, False],
         "commercial": [True, False],
         "xmp": [True, False],
         "png": [True, False],
@@ -64,10 +64,14 @@ class Exiv2Conan(ConanFile):
                       "EXIV2_ENABLE_SSH" : self.options.ssh,
                       "EXIV2_ENABLE_BUILD_SAMPLES" : "OFF",
                       "EXIV2_ENABLE_BUILD_PO" : "OFF",
-                      #"EXIV2_ENABLE_SHARED" : self.options.shared,
-                      "EXIV2_ENABLE_SHARED" : "ON",
+                      "EXIV2_ENABLE_SHARED" : self.options.shared,
                       "EXIV2_ENABLE_XMP" : self.options.xmp,
                       "EXIV2_ENABLE_PNG" : self.options.png,
+
+                      # It cannot be disabled in the version 0.26. The compilation will fail.
+                      # The problem has been fixed on master.
+                      "EXIV2_ENABLE_LIBXMP" : "ON",
+
                       "CMAKE_INSTALL_PREFIX" : self.package_folder
                      }
 
