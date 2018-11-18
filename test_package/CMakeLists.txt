@@ -13,6 +13,8 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup(NO_OUTPUT_DIRS KEEP_RPATHS TARGETS)
 
 
+find_package(Threads REQUIRED)
+find_package(Iconv)
 find_package(exiv2 REQUIRED CONFIG)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
