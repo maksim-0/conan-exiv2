@@ -11,16 +11,11 @@ endif()
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
-find_package(Exiv2 REQUIRED)
+find_package(exiv2 REQUIRED CONFIG)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-message("EXIV2_LIBRARIES: ${EXIV2_LIBRARIES}")
-message("EXIV2_INCLUDE_DIRS: ${EXIV2_INCLUDE_DIRS}")
-message("EXIV2_INCLUDE_DIR: ${EXIV2_INCLUDE_DIR}")
-
 add_executable(testApp main.cpp)
-target_link_libraries(testApp ${EXIV2_LIBRARIES})
-target_include_directories(testApp SYSTEM PRIVATE ${EXIV2_INCLUDE_DIRS})
+target_link_libraries(testApp exiv2lib)
