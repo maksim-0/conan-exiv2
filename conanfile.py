@@ -58,6 +58,7 @@ class Exiv2Conan(ConanFile):
                       "EXIV2_ENABLE_CURL" : self.options.curl,
                       "EXIV2_ENABLE_SSH" : self.options.ssh,
                       "EXIV2_BUILD_SAMPLES" : "OFF",
+                      "EXIV2_BUILD_EXIV2_COMMAND": "OFF",
                       "EXIV2_BUILD_PO" : "OFF",
                       "EXIV2_ENABLE_XMP" : self.options.xmp,
                       "EXIV2_ENABLE_PNG" : self.options.png,
