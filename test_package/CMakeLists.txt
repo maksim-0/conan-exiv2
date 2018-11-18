@@ -9,7 +9,9 @@ if (UNIX) # Assuming the usage of gcc or clang compilers
 endif()
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup()
+#conan_basic_setup()
+conan_basic_setup(NO_OUTPUT_DIRS KEEP_RPATHS TARGETS)
+
 
 find_package(exiv2 REQUIRED CONFIG)
 
