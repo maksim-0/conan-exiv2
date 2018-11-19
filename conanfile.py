@@ -37,7 +37,7 @@ class Exiv2Conan(ConanFile):
 
     def requirements(self):
         self.requires("zlib/1.2.11@conan/stable")
-        self.requires("Expat/2.2.5@pix4d/stable")
+        self.requires("Expat/2.2.6@pix4d/stable")
 
     def configure(self):
         self.options["zlib"].shared = False
