@@ -39,10 +39,6 @@ class Exiv2Conan(ConanFile):
         self.requires("zlib/1.2.11@conan/stable")
         self.requires("Expat/2.2.6@pix4d/stable")
 
-    def configure(self):
-        self.options["zlib"].shared = False
-        self.options["Expat"].shared = False
-
     def source(self):
         self.run("git clone --depth 1 --branch %s https://github.com/Exiv2/exiv2.git" % self.version)
 
