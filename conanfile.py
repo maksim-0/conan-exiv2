@@ -40,7 +40,8 @@ class Exiv2Conan(ConanFile):
         self.requires("Expat/2.2.6@pix4d/stable")
 
     def source(self):
-        self.run("git clone --depth 1 --branch %s https://github.com/Exiv2/exiv2.git" % self.version)
+        #self.run("git clone --depth 1 --branch %s https://github.com/Exiv2/exiv2.git" % self.version)
+        self.run("git clone --depth 1 --branch master https://github.com/Exiv2/exiv2.git")
 
     def build(self):
         tools.replace_in_file("exiv2/cmake/findDependencies.cmake", "conanbuildinfo.cmake)", "../conanbuildinfo.cmake)")
