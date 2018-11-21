@@ -3,7 +3,7 @@ from conans import ConanFile, tools, CMake
 
 class Exiv2Conan(ConanFile):
     name = "Exiv2"
-    version = "0.27-RC2"
+    version = "0.27"
     description = "A C++ library and a command line utility to read and write Exif, IPTC and XMP image metadata"
     license = "GNU GPL2"
     url = "https://github.com/Exiv2/exiv2"
