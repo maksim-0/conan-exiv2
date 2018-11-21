@@ -1,11 +1,3 @@
-
-env:
-   global:
-     - CONAN_REFERENCE: "Exiv2/0.27-RC2"
-     - CONAN_USERNAME: "piponazo"
-     - CONAN_LOGIN_USERNAME: "piponazo"
-     - CONAN_CHANNEL: "testing"
-
 linux: &linux
    os: linux
    sudo: required
