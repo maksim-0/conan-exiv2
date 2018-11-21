@@ -4,14 +4,8 @@ project(Exiv2Test CXX)
 set(CMAKE_CXX_STANDARD 11)
 set(CXX_STANDARD_REQUIRED ON)
 
-if (UNIX) # Assuming the usage of gcc or clang compilers
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
-endif()
-
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-#conan_basic_setup()
-conan_basic_setup(NO_OUTPUT_DIRS KEEP_RPATHS TARGETS)
-
+conan_basic_setup()
 
 find_package(Threads REQUIRED)
 find_package(Iconv)

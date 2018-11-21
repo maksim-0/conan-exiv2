@@ -17,7 +17,4 @@ class Exiv2TestConan(ConanFile):
 
     def test(self):
         data_file = os.path.join(self.source_folder, "dji_inspire_xmp_fake.jpg")
-        if self.settings.os == "Windows":
-            self.run("cd bin/%s && .%stestApp %s" % (self.settings.build_type, os.sep, data_file))
-        else:
-            self.run(".%s/bin/testApp %s" % (os.sep, data_file))
+        self.run("%s %s" % (os.sep.join(['bin', 'testApp']), data_file))
