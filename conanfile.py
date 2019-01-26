@@ -19,6 +19,7 @@ class Exiv2Conan(ConanFile):
         "video": [True, False],
         "lensdata": [True, False],
         "nls": [True, False],
+        "buildTool": [True, False],
         "unicode": [True, False]
     }
 
@@ -31,6 +32,7 @@ class Exiv2Conan(ConanFile):
         "lensdata=False", \
         "unicode=True", \
         "shared=True", \
+        "buildTool=True", \
         "nls=False"
 
     generators = "cmake"
@@ -40,8 +42,7 @@ class Exiv2Conan(ConanFile):
         self.requires("Expat/2.2.6@pix4d/testing")
 
     def source(self):
-        #self.run("git clone --depth 1 --branch %s https://github.com/Exiv2/exiv2.git" % self.version)
-        self.run("git clone --depth 1 --branch master https://github.com/Exiv2/exiv2.git")
+        self.run("git clone --depth 1 --branch 0.27 https://github.com/Exiv2/exiv2.git")
 
     def build(self):
         tools.replace_in_file("exiv2/cmake/findDependencies.cmake", "conanbuildinfo.cmake)", "../conanbuildinfo.cmake)")
@@ -55,7 +56,7 @@ class Exiv2Conan(ConanFile):
                       "EXIV2_ENABLE_CURL" : self.options.curl,
                       "EXIV2_ENABLE_SSH" : self.options.ssh,
                       "EXIV2_BUILD_SAMPLES" : "OFF",
-                      "EXIV2_BUILD_EXIV2_COMMAND": "OFF",
+                      "EXIV2_BUILD_EXIV2_COMMAND": self.options.buildTool,
                       "EXIV2_BUILD_PO" : "OFF",
                       "EXIV2_ENABLE_XMP" : self.options.xmp,
                       "EXIV2_ENABLE_PNG" : self.options.png,
