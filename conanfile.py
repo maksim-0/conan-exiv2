@@ -46,28 +46,28 @@ class Exiv2Conan(ConanFile):
         self.run("git clone --depth 1 --branch 0.27 https://github.com/Exiv2/exiv2.git")
 
     def build(self):
-        tools.replace_in_file("exiv2/cmake/findDependencies.cmake", "conanbuildinfo.cmake)", "../conanbuildinfo.cmake)")
+        tools.replace_in_file("exiv2/cmake/findDependencies.cmake",
+                "conanbuildinfo.cmake)", "../conanbuildinfo.cmake)")
 
         cmake = CMake(self)
 
-        cmake_args = {"EXIV2_ENABLE_NLS" : self.options.nls,
-                      "EXIV2_ENABLE_LENSDATA" : self.options.lensdata,
-                      "EXIV2_ENABLE_VIDEO" : self.options.video,
-                      "EXIV2_ENABLE_WEBREADY" : self.options.webready,
-                      "EXIV2_ENABLE_CURL" : self.options.curl,
-                      "EXIV2_ENABLE_SSH" : self.options.ssh,
-                      "EXIV2_BUILD_SAMPLES" : "OFF",
-                      "EXIV2_BUILD_EXIV2_COMMAND": self.options.buildTool,
-                      "EXIV2_BUILD_PO" : "OFF",
-                      "EXIV2_ENABLE_XMP" : self.options.xmp,
-                      "EXIV2_ENABLE_PNG" : self.options.png,
-                      "CMAKE_INSTALL_PREFIX" : self.package_folder
-                     }
+        cmake.definitions["EXIV2_ENABLE_NLS"] = self.options.nls
+        cmake.definitions["EXIV2_ENABLE_LENSDATA"] = self.options.lensdata
+        cmake.definitions["EXIV2_ENABLE_VIDEO"] = self.options.video
+        cmake.definitions["EXIV2_ENABLE_WEBREADY"] = self.options.webready
+        cmake.definitions["EXIV2_ENABLE_CURL"] = self.options.curl
+        cmake.definitions["EXIV2_ENABLE_SSH"] = self.options.ssh
+        cmake.definitions["EXIV2_BUILD_SAMPLES"] = "OFF"
+        cmake.definitions["EXIV2_BUILD_EXIV2_COMMAND"] = self.options.buildTool
+        cmake.definitions["EXIV2_BUILD_PO"] = "OFF"
+        cmake.definitions["EXIV2_ENABLE_XMP"] = self.options.xmp
+        cmake.definitions["EXIV2_ENABLE_PNG"] = self.options.png
+        cmake.definitions["CMAKE_INSTALL_PREFIX"] = self.package_folder
 
         if tools.os_info.is_windows:
-            cmake_args['EXIV2_ENABLE_WIN_UNICODE'] = self.options.unicode
+            cmake.definitions['EXIV2_ENABLE_WIN_UNICODE'] = self.options.unicode
 
-        cmake.configure(source_dir="../exiv2", build_dir="build", defs=cmake_args)
+        cmake.configure(source_dir="../exiv2", build_dir="build")
         cmake.build()
         cmake.install()
 
