@@ -40,7 +40,7 @@ class Exiv2Conan(ConanFile):
 
     def requirements(self):
         self.requires("zlib/1.2.11@conan/stable")
-        self.requires("Expat/2.2.6@pix4d/testing")
+        self.requires("Expat/2.2.6@pix4d/stable")
 
     def source(self):
         self.run("git clone --depth 1 --branch 0.27 https://github.com/Exiv2/exiv2.git")
