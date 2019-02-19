@@ -23,17 +23,18 @@ class Exiv2Conan(ConanFile):
         "unicode": [True, False]
     }
 
-    default_options = "xmp=True", \
-        "png=True", \
-        "ssh=False", \
-        "curl=False", \
-        "webready=False", \
-        "video=False", \
-        "lensdata=False", \
-        "unicode=True", \
-        "shared=True", \
-        "buildTool=True", \
-        "nls=False"
+    default_options = {"xmp": True,
+                       "png": True,
+                       "ssh": False,
+                       "curl": False,
+                       "webready": False,
+                       "video": False,
+                       "lensdata": False,
+                       "unicode": True,
+                       "shared": True,
+                       "buildTool": True,
+                       "nls": False,
+    }
 
     generators = "cmake"
 
