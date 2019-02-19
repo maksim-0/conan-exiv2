@@ -76,3 +76,6 @@ class Exiv2Conan(ConanFile):
         self.cpp_info.debug.libs = ["exiv2d"]
         self.cpp_info.release.libs = ["exiv2"]
         self.cpp_info.libdirs = ['lib']  # Directories where libraries can be found
+
+    def package(self):
+        self.copy("license.*", src="exiv2", dst="licenses",  ignore_case=True, keep_path=False)
