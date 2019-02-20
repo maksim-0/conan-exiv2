@@ -66,7 +66,7 @@ class Exiv2Conan(ConanFile):
         if tools.os_info.is_windows:
             cmake.definitions['EXIV2_ENABLE_WIN_UNICODE'] = self.options.unicode
 
-        cmake.configure(source_dir="../exiv2", build_dir="build")
+        cmake.configure(source_folder="exiv2", build_folder="build")
         cmake.build()
         cmake.install()
 
