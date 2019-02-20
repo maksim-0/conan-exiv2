@@ -62,7 +62,6 @@ class Exiv2Conan(ConanFile):
         cmake.definitions["EXIV2_BUILD_PO"] = "OFF"
         cmake.definitions["EXIV2_ENABLE_XMP"] = self.options.xmp
         cmake.definitions["EXIV2_ENABLE_PNG"] = self.options.png
-        cmake.definitions["CMAKE_INSTALL_PREFIX"] = self.package_folder
 
         if tools.os_info.is_windows:
             cmake.definitions['EXIV2_ENABLE_WIN_UNICODE'] = self.options.unicode
@@ -72,10 +71,8 @@ class Exiv2Conan(ConanFile):
         cmake.install()
 
     def package_info(self):
-        self.cpp_info.includedirs = ['include']  # Ordered list of include paths
         self.cpp_info.debug.libs = ["exiv2d"]
         self.cpp_info.release.libs = ["exiv2"]
-        self.cpp_info.libdirs = ['lib']  # Directories where libraries can be found
 
     def package(self):
         self.copy("license.*", src="exiv2", dst="licenses",  ignore_case=True, keep_path=False)
