@@ -3,6 +3,10 @@ build: false
 environment:
     PYTHON: "C:\\Python37"
     CONAN_UPLOAD_ONLY_WHEN_STABLE: 1 # Will only upload when the branch matches "release/*"
+    CONAN_STABLE_BRANCH_PATTERN: "stable/*"
+    CONAN_USERNAME: "piponazo"
+    CONAN_LOGIN_USERNAME: "piponazo"
+    CONAN_UPLOAD: "https://api.bintray.com/conan/piponazo/piponazo"
 
     matrix:
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
