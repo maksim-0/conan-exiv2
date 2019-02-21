@@ -4,23 +4,26 @@ project(Exiv2Test CXX)
 set(CMAKE_CXX_STANDARD 11)
 set(CXX_STANDARD_REQUIRED ON)
 
-if (UNIX) # Assuming the usage of gcc or clang compilers
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
-endif()
-
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup()
+conan_basic_setup(KEEP_RPATHS)
 
-find_package(Exiv2 REQUIRED)
+if (UNIX)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
+    set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
+    if (APPLE)
+        set(CMAKE_INSTALL_RPATH "@executable_path/../lib")
+    else ()
+        set(CMAKE_INSTALL_RPATH "$ORIGIN/../lib")
+    endif ()
+endif ()
+
+find_package(Threads REQUIRED)
+find_package(Iconv)
+find_package(exiv2 REQUIRED CONFIG)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-message("EXIV2_LIBRARIES: ${EXIV2_LIBRARIES}")
-message("EXIV2_INCLUDE_DIRS: ${EXIV2_INCLUDE_DIRS}")
-message("EXIV2_INCLUDE_DIR: ${EXIV2_INCLUDE_DIR}")
-
 add_executable(testApp main.cpp)
-target_link_libraries(testApp ${EXIV2_LIBRARIES})
-target_include_directories(testApp SYSTEM PRIVATE ${EXIV2_INCLUDE_DIRS})
+target_link_libraries(testApp exiv2lib)
