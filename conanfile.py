@@ -8,6 +8,7 @@ class Exiv2Conan(ConanFile):
     license = "GNU GPL2"
     url = "https://github.com/Exiv2/exiv2"
     settings = "os", "compiler", "build_type", "arch"
+    exports = "LICENSE"
 
     options = {
         "shared": [True, False],
